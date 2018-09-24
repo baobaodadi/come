@@ -1,11 +1,64 @@
 :global {
+
+  font-family: PingFangSC-Regular;
   .mail{
     .find {
       margin: 30px 0;
+    }
+
+    .anticon{
+      font-size: 18px;
+    }
+
+    .ant-form-explain{
+      line-height: 32px;
+      border: 1px solid #ddd;
+    }
+
+    .mailinfo,.passwordinfo,.confirminfo{
+      .title{
+        line-height: 51px;
+        display: table;
+        img{
+          width: 22px;
+          height: auto;
+          display: inline-block;
+          margin-top: -4px;
+        }
+        span{
+          margin-left: 8px;
+          font-size: 18px;
+          color: #3F3F3F;
+        }
+      }
+
+      .formitem{
+        //width: 217px;
+        .zhui{
+          display: inline-block;
+          margin-left: 10px;
+          line-height: 40px;
+          font-size: 18px;
+          color: #3F3F3F;
+        }
+
+      }
+
+    }
+
+    .mailinfo{
       .has-error.has-feedback .ant-form-item-children-icon, .has-success.has-feedback .ant-form-item-children-icon, .has-warning.has-feedback .ant-form-item-children-icon, .is-validating.has-feedback .ant-form-item-children-icon {
         position: absolute;
         top: 50%;
-        right: -30px;
+        right: -230px;
+      }
+    }
+
+    .passwordinfo,.confirminfo{
+      .has-error.has-feedback .ant-form-item-children-icon, .has-success.has-feedback .ant-form-item-children-icon, .has-warning.has-feedback .ant-form-item-children-icon, .is-validating.has-feedback .ant-form-item-children-icon {
+        position: absolute;
+        top: 50%;
+        right: -67px;
       }
     }
   }
