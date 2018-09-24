@@ -1,0 +1,173 @@
+1. 新增资产接口
+    /assetManager/asset/add
+
+    （封装一个asset的对象传给我吧）
+
+    * 请求参数（新增或修改调接口的时候除了设备类型传值，其他的都传id，id在查询接口中能获取到，多个id通过逗号分隔）：
+      string deviceType    设备类型  （NOTEBOOK - 笔记本，MONITOR - 显示器，HOST - 主机，UIONMAC - 一体机）
+                             （这个值花花业务也要用，我们三个就先这么约定吧）
+      string categoryName    品类
+      int[] categoryId      品类ID
+      int assetStock   资产库存
+      int assetKeepStock  保留库存
+      int[] positionId    岗位序列
+      //显示状态统一都是1显示，0不显示
+      string brand         品牌
+      int brandStatus   品牌显示状态
+      string os            操作系统
+      int osStatus      操作系统显示状态
+      string size          尺寸
+      int sizeStatus    尺寸显示状态
+      string memory        内存
+      int memoryStatus  内存显示状态
+      string disk          硬盘
+      int diskStatus    硬盘显示状态
+      string cpu           cpu
+      int cpuStatus     cpu显示状态
+      string card          显卡
+      int cardStatus    显卡显示状态
+      string resolution       分辨率(供显示器tab下是使用)
+      int resolutionStatus 分辨率显示状态(供显示器tab下是使用)
+      string interface        接口(供显示器tab下是使用)
+      int interfaceStatus  接口显示状态(供显示器tab下是使用)
+      int tempUse       1-是，0-否，默认0
+      string assetPicture 使用文件服务器返回的url
+      int assetStatus (资产状态，主要用来针对是禁用还是启用，创建和修改的时候不用传，根据某个assetId禁用或者启用的时候，
+                    调用mod接口就行，这样不用再单独新增接口
+                    1-启用 0-禁用)
+
+    * 返回结果
+      如果新建成功返回assetId，uuid唯一串，状态码0统一是成功，非0是失败。
+
+
+
+2. 修改资产接口
+    /assetManager/asset/mod
+
+    * 请求参数
+      assetId  新增时候返回的唯一标识
+
+      下面这些字段，页面做监测，如果值有修改，就传最新的值，如果没有改，传null
+      deviceType    设备类型
+      assetName    品类
+      assetId      品类ID
+      assetStock   资产库存
+      assetKeepStock  保留库存
+      positionId    岗位序列
+      brand         品牌
+      brandStatus   品牌显示状态
+      os            操作系统
+      osStatus      操作系统显示状态
+      size          尺寸
+      sizeStatus    尺寸显示状态
+      memory        内存
+      memoryStatus  内存显示状态
+      disk          硬盘
+      diskStatus    硬盘显示状态
+      cpu           cpu
+      cpuStatus     cpu显示状态
+      card          显卡
+      cardStatus    显卡显示状态
+      resolution       分辨率(供显示器tab下是使用)
+      resolutionStatus 分辨率显示状态(供显示器tab下是使用)
+      interface        接口(供显示器tab下是使用)
+      interfaceStatus  接口显示状态(供显示器tab下是使用)
+      tempUse       1-是，0-否，默认0
+      assetPicture 使用文件服务器返回的url
+
+
+
+3. 获取品类信息接口
+    /assetManager/category/getCategory
+
+    * 请求参数
+      deviceType  设备类型 （NOTEBOOK - 笔记本，MONITOR - 显示器，HOST - 主机，UIONMAC - 一体机）
+
+    * 响应结果
+      我直接去查对应当前设备类型下的数据库对应的三级品类名称及对应的id返回给你，也就是这块查找我来做，
+      用不着树了，就是json串列表，示例:
+      二级NOTEBOOK下返回：
+      {
+      	"category": [
+      	              {
+                       "name": "Dell P2314h",
+                       "id": "3445"
+                      },
+                      {
+                       "name": "Apple iMac 21.5",
+                       "id": "1094"
+                      }
+                      ...
+      	            ]
+      }
+
+
+
+4. 获取岗位序列接口
+    TODO  由hr那边提供数据接口，联系张永刚
+
+
+
+5. 获取资产展示信息接口
+    /assetManager/asset/getassetList
+    * 请求参数
+          列表过滤选项
+          string personProperty   人员属性，定义如下，直接传我对应的枚举值，如INT，和原代码统一
+                            EMPL_CLASS_MAP.put("INT", "实习");
+                            EMPL_CLASS_MAP.put("PTE", "派遣");
+                            EMPL_CLASS_MAP.put("FTE", "正式");
+                            EMPL_CLASS_MAP.put("LOG", "后勤-残疾人");
+                            EMPL_CLASS_MAP.put("OUT", "外包");
+          有就传，没有就传null
+
+
+          岗位序列过滤项
+          int[] positionId(多个)  岗位序列过滤id
+          有就传，没有就传null
+
+
+          岗位序列过滤项
+          int[] categoryId(多个)  品类过滤id
+          有就传，没有就传null
+
+
+    * 响应结果
+     根据过滤条件返回asset结果列表,默认按照创建时间正序返回。
+
+
+
+6. 禁用或启用接口
+    还是调用mod接口，别的全部置为null，assetStatus置为相应状态即可。
+
+
+
+7. 重排序接口(置上,置下,推荐)
+    /assetManager/asset/reorderassetList
+
+    * 请求参数
+      int recommand 是否推荐, 1-推荐 0-不推荐，设置推荐的话，花花业务的页面展示会出现推荐字样，并且我把顺序提到list中第一个
+      int move      1-移后1位，-1 - 移前一位(注意是-1，可读性好一些，和1相对)
+
+    * 响应结果
+        重新排序后的list，不再多说。
+
+
+
+8. 日志接口()
+    /assetManager/asset/assetOperateLog
+
+     * 请求参数
+        assetId   资产id
+
+     * 响应接口
+       TODO 放最后做
+
+
+8. 预览接口()
+    /assetManager/asset/assetPreview
+
+     * 请求参数
+        assetId   资产id
+
+     * 响应接口
+       TODO 放最后做

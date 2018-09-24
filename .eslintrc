@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "brace-style": [2, "stroustrup"]
+  },
+  "env": {
+    "browser": true
+  }
+}
