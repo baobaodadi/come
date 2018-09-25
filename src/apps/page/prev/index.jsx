@@ -78,7 +78,6 @@ class Prev extends Component {
     return (
 
       <div className="prev">
-        sad
         <div className="buttonclub">
           <Button type="primary" onClick={this.handleSubmit}>完成</Button>
           <Link to="/mail">
