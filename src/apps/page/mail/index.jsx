@@ -58,12 +58,14 @@ class Mail extends Component {
             //     mail: nextProps.mail
             // });
             if (nextProps.mail) {
+              if (nextProps.mail.status===1013) {
                 this.props.form.setFields({
-                    email: {
-                        value: '',
-                        errors: [new Error(nextProps.mail)],
-                    },
+                  email: {
+                    value: '',
+                    errors: [new Error('邮箱已被占用')],
+                  },
                 });
+              }
             }
         }
 
@@ -125,14 +127,9 @@ class Mail extends Component {
 
         const form = this.props.form;
         if (!/^(?=.*[a-zA-Z-])[0-9a-zA-Z][a-zA-Z0-9-]{0,13}[0-9a-zA-Z]$/.test(value)) {
-            callback(
-              <div className="pugs">
-                <Icon type="frown" theme="outlined" style={{color: '#FD5F29'}}/>
-                <span>邮箱不符合规则</span>
-              </div>
-            );
+            callback('邮箱不符合规则');
         } else {
-            callback('账号命名可以围绕姓名自定义，如：JackSun@sogou-inc.com');
+            callback();
         }
     }
 
@@ -164,6 +161,7 @@ class Mail extends Component {
                                 <FormItem
                                     hasFeedback
                                     style={{'display': 'inline-block', 'width': '217px'}}
+                                    extra="账号命名可以围绕姓名自定义，如：JackSun@sogou-inc.com"
                                 >
                                     {getFieldDecorator('email', {
                                         rules: [{

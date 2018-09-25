@@ -17,8 +17,6 @@ function* fetchMail(action) {
             mailPwd: payload.password,
         });
 
-        console.log(data)
-
         yield put({
             type: actionTypes.UPDATE_MAIL,
             payload: {
