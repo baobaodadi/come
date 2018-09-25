@@ -12,20 +12,10 @@ import passwordimg from '../../../images/password.png';
 import confirmimg from '../../../images/confirm.png';
 import errorimg from '../../../images/error.png';
 import {
-    Table,
     Input,
     Button,
     Icon,
-    Modal,
-    Radio,
-    List,
-    Spin,
-    Card,
-    DatePicker,
-    Select,
-    Tabs,
     Form,
-    TreeSelect
 } from 'antd';
 
 const FormItem = Form.Item;
@@ -83,7 +73,6 @@ class Mail extends Component {
             }
         }
 
-
     }
 
 
@@ -125,7 +114,7 @@ class Mail extends Component {
         else if (form.getFieldValue('password').indexOf(form.getFieldValue('email')) !== -1) {
             callback(<div className="pugs">
               <img src={errorimg} alt=""/>
-              <span>密码不能保护邮箱</span>
+              <span>密码不能包含邮箱</span>
             </div>);
         }
         // else if (value && this.state.confirmDirty) {
@@ -190,7 +179,7 @@ class Mail extends Component {
                                                 validator: this.validateMail
                                             }],
                                     })(
-                                        <Input size="large" disabled={this.state.mailInput}/>
+                                        <Input size="large" disabled={this.state.mailInput} placeholder='字母或数字，长度不超过十位'/>
                                     )}
                                 </FormItem>
                                 <div className='zhui'>
@@ -216,7 +205,7 @@ class Mail extends Component {
                                     validator: this.validateToNextPassword,
                                 }],
                             })(
-                                <Input size="large" type={this.state.eye ? 'text' : 'password'} suffix={suffix}/>
+                                <Input size="large" type={this.state.eye ? 'text' : 'password'} suffix={suffix} placeholder='大写字母、小写字母、数字、符号至少包含三种'/>
                             )}
                         </FormItem>
                         </div>
@@ -239,7 +228,7 @@ class Mail extends Component {
                                     validator: this.compareToFirstPassword,
                                 }],
                             })(
-                                <Input size="large" type="password" onBlur={this.handleConfirmBlur}/>
+                                <Input size="large" type="password" onBlur={this.handleConfirmBlur} placeholder='大写字母、小写字母、数字、符号至少包含三种'/>
                             )}
                         </FormItem>
                         <FormItem>

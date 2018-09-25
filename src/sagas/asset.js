@@ -36,8 +36,6 @@ function* changeAsset(action) {
             preAsset: payload.preAsset,
             tmpAsset: payload.tmpAsset,
         });
-        console.log(data)
-
     }
     catch (e) {
         console.log(e)
