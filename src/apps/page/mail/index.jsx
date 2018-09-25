@@ -47,6 +47,7 @@ class Mail extends Component {
                 value: nextProps.asset.sltMailAcc,
               },
             });
+            this.setState({mailInput:true})
           }else{
             if(nextProps.asset.dftMailAcc) {
               this.props.form.setFields({
@@ -130,7 +131,7 @@ class Mail extends Component {
 
         const form = this.props.form;
         if (!/^(?=.*[a-zA-Z-])[0-9a-zA-Z][a-zA-Z0-9-]{0,13}[0-9a-zA-Z]$/.test(value)) {
-            callback('格式错误，账号首尾必须为字母或数字，且不能全是数字');
+            callback('格式错误,账号首尾必须为字母或数字,不能全是数字)');
         } else {
             callback();
         }

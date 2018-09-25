@@ -9,6 +9,12 @@ const menus = [
         'type': "tags",
         'content': '资产',
     },
+  {
+    'key': 'prev',
+    'type': "tags",
+    'content': '总览',
+  },
+
 
 ];
 
