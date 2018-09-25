@@ -10,6 +10,7 @@ import './index.less';
 import mailimg from '../../../images/mail.png';
 import passwordimg from '../../../images/password.png';
 import confirmimg from '../../../images/confirm.png';
+import errorimg from '../../../images/error.png';
 import {
     Table,
     Input,
@@ -88,7 +89,10 @@ class Mail extends Component {
     compareToFirstPassword(rule, value, callback) {
         const form = this.props.form;
         if (value && value !== form.getFieldValue('password')) {
-            callback('两次密码不一致');
+          callback( <div className="pugs">
+            <img src={errorimg} alt=""/>
+            <span>两次密码不一致</span>
+          </div>);
         } else {
             callback();
         }
@@ -97,13 +101,16 @@ class Mail extends Component {
     validateToNextPassword(rule, value, callback) {
         const form = this.props.form;
         if (!/^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_]+$)(?![a-z0-9]+$)(?![a-z\W_]+$)(?![0-9\W_]+$)[a-zA-Z0-9\W_]{8,}$/.test(value)) {
-            callback( <div className="title">
-                <img src={passwordimg} alt=""/>
-                <span>设置邮箱密码</span>
+            callback( <div className="pugs">
+                <img src={errorimg} alt=""/>
+                <span>密码不符合规则</span>
             </div>);
         }
         else if (form.getFieldValue('password').indexOf(form.getFieldValue('email')) !== -1) {
-            callback('密码不能包含邮箱');
+            callback(<div className="pugs">
+              <img src={errorimg} alt=""/>
+              <span>密码不能保护邮箱</span>
+            </div>);
         }
         // else if (value && this.state.confirmDirty) {
         //     form.validateFields(['confirm'], {force: true});
@@ -118,9 +125,14 @@ class Mail extends Component {
 
         const form = this.props.form;
         if (!/^(?=.*[a-zA-Z-])[0-9a-zA-Z][a-zA-Z0-9-]{0,13}[0-9a-zA-Z]$/.test(value)) {
-            callback('密码不符合规则');
+            callback(
+              <div className="pugs">
+                <Icon type="frown" theme="outlined" style={{color: '#FD5F29'}}/>
+                <span>邮箱不符合规则</span>
+              </div>
+            );
         } else {
-            callback();
+            callback('账号命名可以围绕姓名自定义，如：JackSun@sogou-inc.com');
         }
     }
 
@@ -155,7 +167,7 @@ class Mail extends Component {
                                 >
                                     {getFieldDecorator('email', {
                                         rules: [{
-                                            required: true, message: '请输入邮箱',
+                                            // required: true, message: '请输入邮箱',
                                         },
                                             {
                                                 validator: this.validateMail
@@ -182,7 +194,7 @@ class Mail extends Component {
                         >
                             {getFieldDecorator('password', {
                                 rules: [{
-                                    required: true, message: '请输入密码',
+                                    // required: true, message: '请输入密码',
                                 }, {
                                     validator: this.validateToNextPassword,
                                 }],
@@ -205,12 +217,12 @@ class Mail extends Component {
                         >
                             {getFieldDecorator('confirm', {
                                 rules: [{
-                                    required: true, message: '请确认你的密码',
+                                    // required: true, message: '请确认你的密码',
                                 }, {
                                     validator: this.compareToFirstPassword,
                                 }],
                             })(
-                                <Input type="password" onBlur={this.handleConfirmBlur}/>
+                                <Input size="large" type="password" onBlur={this.handleConfirmBlur}/>
                             )}
                         </FormItem>
                         <FormItem>
