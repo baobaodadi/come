@@ -130,7 +130,7 @@ class Mail extends Component {
 
         const form = this.props.form;
         if (!/^(?=.*[a-zA-Z-])[0-9a-zA-Z][a-zA-Z0-9-]{0,13}[0-9a-zA-Z]$/.test(value)) {
-            callback('邮箱不符合规则');
+            callback('格式错误，账号首尾必须为字母或数字，且不能全是数字');
         } else {
             callback();
         }
@@ -179,7 +179,7 @@ class Mail extends Component {
                                                 validator: this.validateMail
                                             }],
                                     })(
-                                        <Input size="large" disabled={this.state.mailInput} placeholder='字母或数字，长度不超过十位'/>
+                                        <Input size="large" disabled={this.state.mailInput}/>
                                     )}
                                 </FormItem>
                                 <div className='zhui'>
