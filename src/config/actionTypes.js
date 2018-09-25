@@ -8,3 +8,4 @@ export const FETCH_MAIL = 'fetch_mail';
 export const UPDATE_MAIL = 'update_mail';
 
 export const UPDATE_COLLAPSED = 'update_collapsed';
+export const UPDATE_OVER = 'update_over';
