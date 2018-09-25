@@ -13,12 +13,7 @@ function handleResponse(promise, url, method) {
             }
         })
         .then(({ status, statusText}) => {
-            if (+status === 0 || +status === 1013) {
                 return { status, statusText};
-            }else {
-                console.log('network error', { status, message, url, method });
-                throw Object({ status, message, url, method });
-            }
         });
 }
 

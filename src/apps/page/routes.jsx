@@ -17,10 +17,9 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-
-        <Route exact path="/asset" component={Asset}/>
         <Route exact path="/mail" component={Mail}/>
-        <Redirect from="/" to="asset"/>
+        <Route exact path="/asset" component={Asset}/>
+        <Redirect from="/" to="mail"/>
       </Switch>
     );
   }

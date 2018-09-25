@@ -25,7 +25,7 @@ class SiderMenu extends Component {
           inlineIndent="40"
           className="aside-container menu-site"
           mode="inline"
-          defaultSelectedKeys={['back']}
+          defaultSelectedKeys={['mail']}
           selectedKeys={[location.pathname.slice(1,location.pathname.length)]}
         >
           {

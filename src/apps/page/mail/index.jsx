@@ -31,7 +31,8 @@ import {
 const FormItem = Form.Item;
 const defaultState = {
     confirmDirty: true,
-    eye: false
+    eye: false,
+    mailInput:false,
 };
 
 class Mail extends Component {
@@ -49,20 +50,33 @@ class Mail extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.asset !== this.props.asset)
-            this.setState({
-                asset: nextProps.asset
+        if (nextProps.asset !== this.props.asset) {
+          if(nextProps.asset.sltMailAcc){
+            this.props.form.setFields({
+              email: {
+                value: nextProps.asset.sltMailAcc,
+              },
             });
+          }else{
+            if(nextProps.asset.dftMailAcc) {
+              this.props.form.setFields({
+                email: {
+                  value: nextProps.asset.dftMailAcc,
+                },
+              });
+            }
+          }
+        }
         if (nextProps.mail !== this.props.mail) {
             // this.setState({
             //     mail: nextProps.mail
             // });
             if (nextProps.mail) {
-              if (nextProps.mail.status===1013) {
+              if (nextProps.mail.status) {
                 this.props.form.setFields({
                   email: {
                     value: '',
-                    errors: [new Error('邮箱已被占用')],
+                    errors: [new Error(nextProps.mail.statusText)],
                   },
                 });
               }
@@ -140,6 +154,11 @@ class Mail extends Component {
 
     componentDidMount() {
         this.props.fetchAsset();
+
+      console.log(this.props.asset)
+
+
+
     }
 
     render() {
@@ -171,7 +190,7 @@ class Mail extends Component {
                                                 validator: this.validateMail
                                             }],
                                     })(
-                                        <Input size="large"/>
+                                        <Input size="large" disabled={this.state.mailInput}/>
                                     )}
                                 </FormItem>
                                 <div className='zhui'>
@@ -224,7 +243,12 @@ class Mail extends Component {
                             )}
                         </FormItem>
                         <FormItem>
-                            <Button type="primary" htmlType="submit">Register</Button>
+                          <div className="buttonclub">
+                            <Button type="primary" htmlType="submit">保存</Button>
+                            <Link to='/asset'>
+                              <Button type="primary">下一步</Button>
+                            </Link>
+                          </div>
                         </FormItem>
                             </div>
                         </div>
