@@ -13,7 +13,7 @@ import {Affix} from 'antd';
 import {connect} from "react-redux";
 import * as actionTypes from "../../../config/actionTypes";
 const defaultState = {
-        // over:[0,0]
+        over:[0,0]
 };
 
 class SiderMenu extends Component {
@@ -31,14 +31,14 @@ class SiderMenu extends Component {
     }
 
     componentDidMount(){
-      this.props.over()
+      // this.props.over()
     }
 
 
 
   render() {
-    const {location} = this.props;
-    console.log(this.state.over)
+    const {location,over} = this.props;
+    console.log(over)
     return (
         <Menu
           inlineIndent="40"
@@ -53,10 +53,17 @@ class SiderMenu extends Component {
                       <Link
                           to={'/' + item.key}
                       >
-                          <span>{item.content} {this.state.over&&this.state.over[i]?'2':'1'}</span>
+                          <span>{item.content} {this.state.over&&this.state.over[i]?<Icon type="check" theme="outlined" />:<Icon type="warning" theme="outlined" />}</span>
                       </Link>
                   </Menu.Item>)
           }
+          <Menu.Item key='prev'>
+            <Link
+              to='/prev'
+            >
+              <span>总览  </span>
+            </Link>
+          </Menu.Item>
         </Menu>
     );
   }
@@ -70,7 +77,7 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = dispatch => ({
-    over: (payload) => dispatch({
+    updateOver: (payload) => dispatch({
         type: actionTypes.UPDATE_OVER,
         payload
     }),

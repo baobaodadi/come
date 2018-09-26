@@ -62,9 +62,8 @@ class Asset extends Component {
     }
 
     handleSubmit(e) {
-
-        this.props.changeAsset({preAsset: this.state.preAsset, tmpAsset: this.state.tmpAsset})
-        this.props.over({over:[0,1]})
+        this.props.changeAsset({preAsset: this.state.preAsset, tmpAsset: this.state.tmpAsset});
+        this.props.updateOver({over:[this.props.over[0],1]})
     }
 
 
@@ -217,7 +216,7 @@ const mapDispatchToProps = dispatch => ({
         type: actionTypes.CHANGE_ASSET,
         payload
     }),
-    over: (payload) => dispatch({
+   updateOver: (payload) => dispatch({
         type: actionTypes.UPDATE_OVER,
         payload
     }),
