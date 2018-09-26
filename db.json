@@ -1,93 +1,49 @@
 {
-  "getCategory": {
+  "info": {
     "status": 0,
-    "message": "成功",
-    "code": 0,
-    "returnValue": null,
+    "statusText": "get init info success",
+    "ts": 1537959223138,
     "data": {
-      "category": [
+      "emplClass": "FTE",
+      "entryClass": "ZS",
+      "dftMailAcc": "wojiushiniu",
+      "sltMailAcc": "123qwe",
+      "dftCmls": [
         {
-          "name": "Dell P2314h",
-          "id": "3445"
-        },
-        {
-          "name": "Apple iMac 21.5",
-          "id": "1093"
-        },
-        {
-          "name": "Apple iMac 212.5",
-          "id": "1095"
-        },
-        {
-          "name": "Apple iMac 214.5",
-          "id": "1096"
-        },
-        {
-          "name": "Apple iMac 217.5",
-          "id": "1098"
+          "categoryName": "鼠标",
+          "code": "1"
         }
-      ]
-    }
-  },
-  "getAssetList": {
-    "status": 0,
-    "message": "成功",
-    "code": 0,
-    "returnValue": null,
-    "data": {
-      "list": [
+      ],
+      "dftHt": [
         {
-          "assetId": "10988",
-          "deviceType": "笔记本",
-          "categoryName": "del",
-          "categoryId": "1096",
-          "assetStock": "22",
-          "assetKeepStock": "3",
-          "positionId": [
-            "产品",
-            "技术"
-          ],
-          "brand": "DEL",
-          "brandStatus": 1,
-          "os": "DEL",
-          "osStatus": 1,
-          "size": "100*200",
-          "sizeStatus": 1,
-          "memory": "8",
-          "memoryStatus": 1,
-          "disk": 1,
-          "diskStatus": 1,
-          "cpu": "i8",
-          "cpuStatus": 0,
-          "card": 1,
-          "cardStatus": 1,
-          "resolution": "1920",
-          "resolutionStatus": 1,
-          "interface": "serial",
-          "interfaceStatus": 1,
-          "tempUse": 0,
-          "assetPicture": "https://pic.baike.soso.com/ugc/baikepic2/0/ori-20180122204025-1453227815_png_935_593_556133.jpg/800",
-          "assetStatus": 1
+          "categoryName": "鼠标",
+          "code": "1"
         }
+      ],
+      "dftUn": [
+        {
+          "categoryName": "鼠标",
+          "code": "1"
+        }
+      ],
+      "dftNt": [
+        {
+          "categoryName": "鼠标",
+          "code": "1"
+        }
+      ],
+      "dftMn": [
+        {
+          "categoryName": "鼠标",
+          "code": "1"
+        }
+      ],
+      "preAsset": [
+        "HP NX6330"
+      ],
+      "tmpAsset": [
+        "HP NX6330"
       ]
-    }
-  },
-  "add": {
-    "status": 0,
-    "message": "成功",
-    "code": 0,
-    "returnValue": null,
-    "data": {
-      "status": "ok"
-    }
-  },
-  "mod": {
-    "status": 0,
-    "message": "成功",
-    "code": 0,
-    "returnValue": null,
-    "data": {
-      "status": "ok"
     }
   }
 }

@@ -8,6 +8,7 @@ server.use(jsonServer.rewriter({
   // "/api/accounting/*/:id": "/$1/:id",
   "/getCategory": "/assetManager/category/getCategory",
   "/getAssetList": "/assetManager/asset/getAssetList",
+  // "/info": "/pub/sylla/api/pub-rzzc/pre/info",
 }));
 server.use(router);
 server.listen(3001, () => {
