@@ -24,6 +24,7 @@ import {
     TreeSelect
 } from 'antd';
 import 'moment/locale/zh-cn'
+import logo from '../../../images/logo.png';
 
 const TabPane = Tabs.TabPane;
 const RadioGroup = Radio.Group;
@@ -90,14 +91,17 @@ class Asset extends Component {
                                             renderItem={(item, i) => (
                                                 <List.Item>
                                                     <Card style={{width: 300}}>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
-                                                        <p>{item.categoryName}:asdasdasddsass</p>
+                                                        <img src={logo} alt="" className='asset-image'/>
+                                                        <p className='asset-title'>{item.categoryName}</p>
+                                                        <div className="detail">
+                                                        <p>cpu:{item.cpu}</p>
+                                                        <p>内存:{item.memory}</p>
+                                                        <p>硬盘:{item.disk}</p>
+                                                        <p>显卡:{item.card}</p>
+                                                        <p>系统:{item.os}</p>
+                                                        <p>分辨率:{item.resolution}</p>
+                                                        <p>尺寸:{item.size}</p>
+                                                        </div>
                                                         <RadioButton value={item.code}>{item.code}</RadioButton>
                                                     </Card>
                                                 </List.Item>

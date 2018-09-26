@@ -12,75 +12,74 @@ import menus from '../../../config/menus'
 import {Affix} from 'antd';
 import {connect} from "react-redux";
 import * as actionTypes from "../../../config/actionTypes";
+
 const defaultState = {
-        over:[0,0]
+  over: [0, 0]
 };
 
 class SiderMenu extends Component {
 
   constructor(props) {
     super(props);
-      this.state = {...defaultState};
+    this.state = {...defaultState};
   }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.over !== this.props.over) {
-            console.log(nextProps.over)
-            this.setState({over:nextProps.over})
-        }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.over !== this.props.over) {
+      this.setState({over: nextProps.over})
     }
+  }
 
-    componentDidMount(){
-      // this.props.over()
-    }
-
+  componentDidMount() {
+  }
 
 
   render() {
-    const {location,over} = this.props;
-    console.log(over)
+    const {location, over} = this.props;
     return (
-        <Menu
-          inlineIndent="40"
-          className="aside-container menu-site"
-          mode="inline"
-          defaultSelectedKeys={['mail']}
-          selectedKeys={[location.pathname.slice(1,location.pathname.length)]}
-        >
-          {
-              menus && menus.map((item, i) =>
-                  <Menu.Item key={item.key}>
-                      <Link
-                          to={'/' + item.key}
-                      >
-                          <span>{item.content} {this.state.over&&this.state.over[i]?<Icon type="check" theme="outlined" style={{color:'green'}}/>:<Icon type="exclamation-circle" theme="outlined" style={{color:'#F15723'}}/>}</span>
-                      </Link>
-                  </Menu.Item>)
-          }
-          <Menu.Item key='prev'>
-            <Link
-              to='/prev'
-            >
-              <span>总览  </span>
-            </Link>
-          </Menu.Item>
-        </Menu>
+      <Menu
+        inlineIndent="40"
+        className="aside-container menu-site"
+        mode="inline"
+        defaultSelectedKeys={['mail']}
+        selectedKeys={[location.pathname.slice(1, location.pathname.length)]}
+      >
+        {
+          menus && menus.map((item, i) =>
+            <Menu.Item key={item.key}>
+              <Link
+                to={'/' + item.key}
+              >
+                <span>{item.content} {this.state.over && this.state.over[i] ?
+                  <Icon type="check" theme="outlined" style={{color: 'green'}}/> :
+                  <Icon type="exclamation-circle" theme="outlined" style={{color: '#F15723'}}/>}</span>
+              </Link>
+            </Menu.Item>)
+        }
+        <Menu.Item key="prev">
+          <Link
+            to="/prev"
+          >
+            <span>总览  </span>
+          </Link>
+        </Menu.Item>
+      </Menu>
     );
   }
 }
 
 const mapStateToProps = state => {
-    return ({
-        over: state.globle.over,
-    })
+  return ({
+    over: state.globle.over,
+  })
 };
 
 
 const mapDispatchToProps = dispatch => ({
-    updateOver: (payload) => dispatch({
-        type: actionTypes.UPDATE_OVER,
-        payload
-    }),
+  updateOver: (payload) => dispatch({
+    type: actionTypes.UPDATE_OVER,
+    payload
+  }),
 });
 
 
