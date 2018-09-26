@@ -53,7 +53,7 @@ class SiderMenu extends Component {
                       <Link
                           to={'/' + item.key}
                       >
-                          <span>{item.content} {this.state.over&&this.state.over[i]?<Icon type="check" theme="outlined" />:<Icon type="warning" theme="outlined" />}</span>
+                          <span>{item.content} {this.state.over&&this.state.over[i]?<Icon type="check" theme="outlined" style={{color:'green'}}/>:<Icon type="exclamation-circle" theme="outlined" style={{color:'#F15723'}}/>}</span>
                       </Link>
                   </Menu.Item>)
           }
