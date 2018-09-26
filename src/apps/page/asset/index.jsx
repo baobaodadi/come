@@ -135,7 +135,7 @@ class Asset extends Component {
                               <li>分辨率:{item.resolution}</li>
                               <li>尺寸:{item.size}</li>
                             </ul>
-                            <RadioButton value={item.categoryId}>选择</RadioButton>
+                            <RadioButton disabled value={item.categoryId}>选择</RadioButton>
                           </Card>
                         </List.Item>
                       )}
