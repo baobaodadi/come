@@ -13,7 +13,7 @@ import {Affix} from 'antd';
 import {connect} from "react-redux";
 import * as actionTypes from "../../../config/actionTypes";
 const defaultState = {
-    over:[1,0],
+        // over:[0,0]
 };
 
 class SiderMenu extends Component {
@@ -25,8 +25,13 @@ class SiderMenu extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.over !== this.props.over) {
-            this.setState({over})
+            console.log(nextProps.over)
+            this.setState({over:nextProps.over})
         }
+    }
+
+    componentDidMount(){
+      this.props.over()
     }
 
 
@@ -48,7 +53,7 @@ class SiderMenu extends Component {
                       <Link
                           to={'/' + item.key}
                       >
-                          <span>{item.content} {this.state.over[i]?'2':'1'}</span>
+                          <span>{item.content} {this.state.over&&this.state.over[i]?'2':'1'}</span>
                       </Link>
                   </Menu.Item>)
           }
