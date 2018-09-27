@@ -40,9 +40,9 @@ const RadioButton = Radio.Button;
 
 const defaultState = {
   goods: [],
-  preAsset: '',
+  cgyIds: '',
   tmpAsset: '',
-  select: '1'
+  select: 'NOTEBOOK'
 };
 
 class Asset extends Component {
@@ -76,14 +76,14 @@ class Asset extends Component {
       <div className="assetlist">
       {
         asset ?
-          <RadioGroup defaultValue={asset[type][0].categoryId} value={this.state.preAsset} size="large"
+          <RadioGroup defaultValue={asset[type][0].categoryId} value={this.state.cgyIds} size="large"
                       onChange={this.handleSelect} >
             <List
               grid={{column: 3}}
               dataSource={asset[type]}
               renderItem={(item, i) => (
                 <List.Item>
-                  <Card style={((this.state.preAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
+                  <Card style={((this.state.cgyIds.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
                     <div className="asset-top">
                       <img src={logo} alt="" className="asset-image"/>
                       {console.log(item.categoryId)}
@@ -119,11 +119,11 @@ class Asset extends Component {
 
   handleSelect(e) {
     console.log(e.target.value);
-    this.setState({preAsset: e.target.value, tmpAsset: e.target.value})
+    this.setState({cgyIds: e.target.value, tmpAsset: e.target.value})
   }
 
   handleSubmit(e) {
-    this.props.changeAsset({preAsset: this.state.preAsset, tmpAsset: this.state.tmpAsset});
+    this.props.changeAsset({cgyIds: this.state.cgyIds, deviceType: this.state.select});
     this.props.updateOver({over: [this.props.over[0], 1]})
   }
 
@@ -139,18 +139,18 @@ class Asset extends Component {
     return (
 
       <div className="asset">
-        <Tabs defaultActiveKey="1" onChange={this.handleTab}>
+        <Tabs defaultActiveKey="NOTEBOOK" onChange={this.handleTab}>
           <TabPane tab={
             <div>
               <div>
-                {(this.state.select === '1') ?
+                {(this.state.select === 'NOTEBOOK') ?
                   <img src={notes}/> :
                   <img src={note}/>
                 }
               </div>
               <div className="name">笔记本电脑</div>
             </div>
-          } key="1">
+          } key="NOTEBOOK">
             <div className="find">
               {/*{this.assetList(asset,'dftNt')}*/}
             </div>
@@ -158,14 +158,14 @@ class Asset extends Component {
           <TabPane tab={
             <div>
               <div>
-                {(this.state.select === '2') ?
+                {(this.state.select === 'MONITOR') ?
                   <img src={pcs}/> :
                   <img src={pc}/>
                 }
               </div>
               <div className="name">台式机电脑</div>
             </div>
-          } key="2">
+          } key="MONITOR">
             <div className="find">
               {/*{this.assetList(asset,'dftHt')}*/}
 
@@ -176,14 +176,14 @@ class Asset extends Component {
           <TabPane tab={
             <div>
               <div>
-                {(this.state.select === '3') ?
+                {this.state.select === 'UIONMAC' ?
                   <img src={ones}/> :
                   <img src={one}/>
                 }
               </div>
               <div className="name">一体机</div>
             </div>
-          } key="3">
+          } key="UIONMAC">
             {/*{this.assetList(asset,'dftUn')}*/}
 
           </TabPane>
