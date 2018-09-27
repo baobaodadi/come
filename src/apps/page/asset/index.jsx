@@ -113,7 +113,7 @@ class Asset extends Component {
                       dataSource={asset.dftNt}
                       renderItem={(item, i) => (
                         <List.Item>
-                          <Card style={{width: 273}}>
+                          <Card bodyStyle={{width: 273,boxShadow: '0px 3px 4px #e5e5e5'}}>
                             <div className="asset-top">
                               <img src={logo} alt="" className="asset-image"/>
                               {
