@@ -33,7 +33,7 @@ function* changeAsset(action) {
     const {payload} = action;
     try {
         const data=yield serviceMail.post(API[ENTITY_CHANGE], {
-            preAsset: payload.preAsset,
+          deviceType: payload.deviceType,
             tmpAsset: payload.tmpAsset,
         });
     }

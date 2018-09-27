@@ -53,6 +53,7 @@ class Asset extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTab = this.handleTab.bind(this);
+    this.assetList = this.assetList.bind(this);
 
   }
 
@@ -68,6 +69,52 @@ class Asset extends Component {
     this.setState({
       select: value
     });
+  }
+
+  assetList(asset,type) {
+    return(
+      <div className="assetlist">
+      {
+        asset ?
+          <RadioGroup defaultValue={asset[type][0].categoryId} value={this.state.preAsset} size="large"
+                      onChange={this.handleSelect} >
+            <List
+              grid={{column: 3}}
+              dataSource={asset[type]}
+              renderItem={(item, i) => (
+                <List.Item>
+                  <Card style={((this.state.preAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
+                    <div className="asset-top">
+                      <img src={logo} alt="" className="asset-image"/>
+                      {console.log(item.categoryId)}
+                      {
+
+                        item.recommend?<img src={rec} alt="" className="asset-rec"/>:null
+
+                      }
+                      {
+                        (item.assetKeepStock>item.assetStock)?<img src={bu} alt="" className="asset-rec"/>:null
+
+                      }
+                    </div>
+                    <div className="asset-title">{item.categoryName}</div>
+                    <ul className="detail">
+                      <li>cpu:{item.cpu}</li>
+                      <li>内存:{item.memory}</li>
+                      <li>硬盘:{item.disk}</li>
+                      <li>显卡:{item.card}</li>
+                      <li>系统:{item.os}</li>
+                      <li>分辨率:{item.resolution}</li>
+                      <li>尺寸:{item.size}</li>
+                    </ul>
+                    <RadioButton disable={(item.assetKeepStock>item.assetStock)?true:false} value={item.categoryId}>选择</RadioButton>
+                  </Card>
+                </List.Item>
+              )}
+            /> </RadioGroup> : null
+      }
+      </div>
+    )
   }
 
   handleSelect(e) {
@@ -87,6 +134,7 @@ class Asset extends Component {
 
   render() {
     const {asset} = this.props;
+    console.log(asset)
 
     return (
 
@@ -104,46 +152,7 @@ class Asset extends Component {
             </div>
           } key="1">
             <div className="find">
-              {
-                asset ?
-                  <RadioGroup defaultValue={asset.dftMn[0].categoryId} value={this.state.preAsset} size="large"
-                              onChange={this.handleSelect} >
-                    <List
-                      grid={{column: 3}}
-                      dataSource={asset.dftMn}
-                      renderItem={(item, i) => (
-                        <List.Item>
-                          <Card style={((this.state.preAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
-                            <div className="asset-top">
-                              <img src={logo} alt="" className="asset-image"/>
-                              {console.log(item.categoryId)}
-                              {
-
-                                item.recommend?<img src={rec} alt="" className="asset-rec"/>:null
-
-                              }
-                              {
-                                (item.assetKeepStock>item.assetStock)?<img src={bu} alt="" className="asset-rec"/>:null
-
-                              }
-                            </div>
-                            <div className="asset-title">{item.categoryName}</div>
-                            <ul className="detail">
-                              <li>cpu:{item.cpu}</li>
-                              <li>内存:{item.memory}</li>
-                              <li>硬盘:{item.disk}</li>
-                              <li>显卡:{item.card}</li>
-                              <li>系统:{item.os}</li>
-                              <li>分辨率:{item.resolution}</li>
-                              <li>尺寸:{item.size}</li>
-                            </ul>
-                            <RadioButton disable={(item.assetKeepStock>item.assetStock)?true:false} value={item.categoryId}>选择</RadioButton>
-                          </Card>
-                        </List.Item>
-                      )}
-                    /> </RadioGroup> : null
-              }
-
+              {/*{this.assetList(asset,'dftNt')}*/}
             </div>
           </TabPane>
           <TabPane tab={
@@ -158,56 +167,9 @@ class Asset extends Component {
             </div>
           } key="2">
             <div className="find">
-              {
-                asset ?
-                  <RadioGroup defaultValue={asset.dftMn[0].categoryId} size="large"
-                              onChange={this.handleSelect}>
-                    <List
-                      grid={{gutter: 16, column: 3}}
-                      dataSource={asset.dftUn}
-                      renderItem={(item, i) => (
-                        <List.Item>
-                          <Card style={{width: 300}}>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <RadioButton value={item.categoryId}>{item.categoryId}</RadioButton>
-                          </Card>
-                        </List.Item>
-                      )}
-                    /> </RadioGroup>
-                  : null
-              }
+              {/*{this.assetList(asset,'dftHt')}*/}
 
-              {
-                asset ?
-                  <RadioGroup defaultValue={asset.dftMn[0].categoryId} size="large"
-                              onChange={this.handleSelect}>
-                    <List
-                      grid={{gutter: 16, column: 3}}
-                      dataSource={asset.dftMn}
-                      renderItem={(item, i) => (
-                        <List.Item>
-                          <Card style={{width: 300}}>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <p>{item.categoryName}:asdasdasddsass</p>
-                            <RadioButton value={item.categoryId}>{item.categoryId}</RadioButton>
-                          </Card>
-                        </List.Item>
-                      )}
-                    />
-                  </RadioGroup>
-                  : null
-              }
+              {this.assetList(asset,'dftMn')}
 
             </div>
           </TabPane>
@@ -222,29 +184,7 @@ class Asset extends Component {
               <div className="name">一体机</div>
             </div>
           } key="3">
-            {
-              asset ?
-                <RadioGroup defaultValue={asset.dftMn[0].categoryId} size="large"
-                            onChange={this.handleSelect}>
-                  <List
-                    grid={{gutter: 16, column: 3}}
-                    dataSource={asset.dftHt}
-                    renderItem={(item, i) => (
-                      <List.Item>
-                        <Card style={{width: 300}}>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <p>{item.categoryName}:asdasdasddsass</p>
-                          <RadioButton value={item.categoryId}>{item.categoryId}</RadioButton>
-                        </Card>
-                      </List.Item>
-                    )}
-                  /> </RadioGroup> : null
-            }
+            {/*{this.assetList(asset,'dftUn')}*/}
 
           </TabPane>
         </Tabs>
