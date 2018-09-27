@@ -71,7 +71,7 @@ class Asset extends Component {
   }
 
   handleSelect(e) {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     this.setState({preAsset: e.target.value, tmpAsset: e.target.value})
   }
 
@@ -106,22 +106,24 @@ class Asset extends Component {
             <div className="find">
               {
                 asset ?
-                  <RadioGroup defaultValue={asset.dftNt[0].categoryId} value={this.state.preAsset} size="large"
+                  <RadioGroup defaultValue={asset.dftMn[0].categoryId} value={this.state.preAsset} size="large"
                               onChange={this.handleSelect} >
                     <List
                       grid={{column: 3}}
-                      dataSource={asset.dftNt}
+                      dataSource={asset.dftMn}
                       renderItem={(item, i) => (
                         <List.Item>
-                          <Card bodyStyle={{width: 273,boxShadow: '0px 3px 4px #e5e5e5'}}>
+                          <Card style={((this.state.preAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
                             <div className="asset-top">
                               <img src={logo} alt="" className="asset-image"/>
+                              {console.log(item.categoryId)}
                               {
-                                !item.recommend?<img src={rec} alt="" className="asset-rec"/>:null
+
+                                item.recommend?<img src={rec} alt="" className="asset-rec"/>:null
 
                               }
                               {
-                                item.recommend?<img src={bu} alt="" className="asset-rec"/>:null
+                                (item.assetKeepStock>item.assetStock)?<img src={bu} alt="" className="asset-rec"/>:null
 
                               }
                             </div>
@@ -135,7 +137,7 @@ class Asset extends Component {
                               <li>分辨率:{item.resolution}</li>
                               <li>尺寸:{item.size}</li>
                             </ul>
-                            <RadioButton disabled value={item.categoryId}>选择</RadioButton>
+                            <RadioButton disable={(item.assetKeepStock>item.assetStock)?true:false} value={item.categoryId}>选择</RadioButton>
                           </Card>
                         </List.Item>
                       )}
@@ -158,7 +160,7 @@ class Asset extends Component {
             <div className="find">
               {
                 asset ?
-                  <RadioGroup defaultValue={asset.dftNt[0].categoryId} size="large"
+                  <RadioGroup defaultValue={asset.dftMn[0].categoryId} size="large"
                               onChange={this.handleSelect}>
                     <List
                       grid={{gutter: 16, column: 3}}
@@ -183,7 +185,7 @@ class Asset extends Component {
 
               {
                 asset ?
-                  <RadioGroup defaultValue={asset.dftNt[0].categoryId} size="large"
+                  <RadioGroup defaultValue={asset.dftMn[0].categoryId} size="large"
                               onChange={this.handleSelect}>
                     <List
                       grid={{gutter: 16, column: 3}}
@@ -222,7 +224,7 @@ class Asset extends Component {
           } key="3">
             {
               asset ?
-                <RadioGroup defaultValue={asset.dftNt[0].categoryId} size="large"
+                <RadioGroup defaultValue={asset.dftMn[0].categoryId} size="large"
                             onChange={this.handleSelect}>
                   <List
                     grid={{gutter: 16, column: 3}}
