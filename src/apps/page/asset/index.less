@@ -105,21 +105,22 @@
         text-align: center;
         padding: 30px 40px 16px 40px;
 
-
         .asset-top{
           position: relative;
+          .asset-image {
+            width: 165px;
+            height: 120px;
+            min-height: 120px;
+          }
+          .asset-rec{
+            position: absolute;
+            top:0;
+            left: 21px;
+            width: 42px;
+            //height: 42px;
+          }
         }
-        .asset-image {
-          width: 165px;
-          height: 120px;
-        }
-        .asset-rec{
-          position: absolute;
-          top:0;
-          left: 21px;
-          width: 42px;
-          //height: 42px;
-        }
+
         .asset-title {
 
           margin: 10px 0 12px 0;
@@ -129,7 +130,7 @@
 
         }
         ul.detail {
-          margin-bottom: 20px;
+          margin: 0 -30px 20px -30px;
           list-style: circle;
           text-align: left;
           li{

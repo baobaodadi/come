@@ -41,6 +41,11 @@ function formatApiParams(api, params) {
     });
   }
 
+  console.log( {
+    newApi,
+    newParams
+  })
+
   return {
     newApi,
     newParams

@@ -31,9 +31,10 @@ function* fetchAsset(action) {
 
 function* changeAsset(action) {
     const {payload} = action;
+    console.log(JSON.stringify(payload.preAsset))
     try {
         const data=yield serviceMail.post(API[ENTITY_CHANGE], {
-            ...payload
+          preAsset:JSON.stringify(payload.preAsset)
         });
     }
     catch (e) {

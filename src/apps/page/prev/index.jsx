@@ -76,7 +76,7 @@ class Prev extends Component {
 
   render() {
     const {asset} = this.props;
-
+    console.log(asset)
     return (
 
       <div className="prev">
@@ -89,21 +89,35 @@ class Prev extends Component {
               <div className="prev">
                 <span className='title'>预选资产</span>
                 <img src={bu} className='bu' />
-                <span className='level'>笔记本电脑</span>
-                <span className='sword'>></span>
-                <span className='level'>DELL</span>
+                {
+                  asset&&asset.preAsset.map((item,i)=>{
+                    return (<span key={i}>
+                    <span className='level'> {item.split(',')[0]}</span>
+                    <span className='sword'>></span>
+                    <span className='level'> {item.split(',')[1]}  </span>
+                    </span>)
+                  })
+                }
               </div>
               <div className="temp">
                 <span className='title'>临时资产</span>
-                <span className='level'>笔记本电脑</span>
-                <span className='sword'>></span>
-                <span className='level'>DELL</span>
+                {
+                  asset&&asset.tmpAsset.map((item,i)=>{
+                  return (<span key={i}>
+                    <span className='level'> {item.split(',')[0]}</span>
+                    <span className='sword'>></span>
+                    <span className='level'> {item.split(',')[1]}  </span>
+                    </span>)
+                  })
+                }
               </div>
               <div className="default">
                 <span className='title'>默认耗材</span>
-                <span className='level'>笔记本电脑</span>
-                <span className='sword'>></span>
-                <span className='level'>DELL</span>
+                {
+                  asset&&asset.dftCmls.map((item,i)=>{
+                    return <span key={i} className='level'>{item}  </span>
+                  })
+                }
               </div>
           </div>
           <div className="xiaop">

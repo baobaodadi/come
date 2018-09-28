@@ -40,7 +40,7 @@ const RadioButton = Radio.Button;
 
 const defaultState = {
   goods: [],
-  cgyIds: '',
+  preAsset: '',
   tmpAsset: '',
   select: 'NOTEBOOK'
 };
@@ -76,20 +76,20 @@ class Asset extends Component {
       <div className="assetlist">
       {
         asset ?
-          <RadioGroup defaultValue={asset[type][0].categoryId} value={this.state.cgyIds} size="large"
+          <RadioGroup defaultValue={asset[type][0].categoryId} value={this.state.preAsset} size="large"
                       onChange={this.handleSelect} >
             <List
               grid={{column: 3}}
               dataSource={asset[type]}
               renderItem={(item, i) => (
                 <List.Item>
-                  <Card style={((this.state.cgyIds.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
+                  <Card style={((this.state.preAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
                     <div className="asset-top">
-                      <img src={logo} alt="" className="asset-image"/>
+                      <img src={item.assetPicture} alt="" className="asset-image"/>
                       {console.log(item.categoryId)}
                       {
 
-                        item.recommend?<img src={rec} alt="" className="asset-rec"/>:null
+                        i===0?<img src={rec} alt="" className="asset-rec"/>:null
 
                       }
                       {
@@ -99,15 +99,17 @@ class Asset extends Component {
                     </div>
                     <div className="asset-title">{item.categoryName}</div>
                     <ul className="detail">
+                      <li>cpu:{item.brand}</li>
                       <li>cpu:{item.cpu}</li>
                       <li>内存:{item.memory}</li>
                       <li>硬盘:{item.disk}</li>
                       <li>显卡:{item.card}</li>
                       <li>系统:{item.os}</li>
                       <li>分辨率:{item.resolution}</li>
+                      <li>接口:{item.adapter}</li>
                       <li>尺寸:{item.size}</li>
                     </ul>
-                    <RadioButton disable={(item.assetKeepStock>item.assetStock)?true:false} value={item.categoryId}>选择</RadioButton>
+                    <RadioButton disable={(item.assetKeepStock > item.assetStock)} value={`${item.categoryId},${item.deviceType}`}>选择</RadioButton>
                   </Card>
                 </List.Item>
               )}
@@ -119,11 +121,20 @@ class Asset extends Component {
 
   handleSelect(e) {
     console.log(e.target.value);
-    this.setState({cgyIds: e.target.value, tmpAsset: e.target.value})
+    this.setState({preAsset: e.target.value, tmpAsset: e.target.value})
   }
 
   handleSubmit(e) {
-    this.props.changeAsset({cgyIds: this.state.cgyIds, deviceType: this.state.select});
+    this.props.changeAsset(
+      {
+        preAsset: [
+          {
+            "categoryId":this.state.preAsset.split(',')[0],
+            "deviceType": this.state.preAsset.split(',')[1]
+          }
+        ]
+      }
+    );
     this.props.updateOver({over: [this.props.over[0], 1]})
   }
 
@@ -134,7 +145,6 @@ class Asset extends Component {
 
   render() {
     const {asset} = this.props;
-    console.log(asset)
 
     return (
 
@@ -152,7 +162,7 @@ class Asset extends Component {
             </div>
           } key="NOTEBOOK">
             <div className="find">
-              {/*{this.assetList(asset,'dftNt')}*/}
+              {this.assetList(asset,'dftNt')}
             </div>
           </TabPane>
           <TabPane tab={
@@ -167,8 +177,7 @@ class Asset extends Component {
             </div>
           } key="MONITOR">
             <div className="find">
-              {/*{this.assetList(asset,'dftHt')}*/}
-
+              {this.assetList(asset,'dftHt')}
               {this.assetList(asset,'dftMn')}
 
             </div>
@@ -184,8 +193,7 @@ class Asset extends Component {
               <div className="name">一体机</div>
             </div>
           } key="UIONMAC">
-            {/*{this.assetList(asset,'dftUn')}*/}
-
+            {this.assetList(asset,'dftUn')}
           </TabPane>
         </Tabs>
         <div className="buttonclub">
