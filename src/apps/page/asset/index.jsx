@@ -41,6 +41,7 @@ const RadioButton = Radio.Button;
 const defaultState = {
   goods: [],
   preAsset: '',
+  hostAsset: '',
   visible: 0,
   tmpAsset: '',
   select: 'NOTEBOOK'
@@ -52,6 +53,7 @@ class Asset extends Component {
     super(props);
     this.state = {...defaultState};
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleSelect2 = this.handleSelect2.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTab = this.handleTab.bind(this);
     this.handleOk = this.handleOk.bind(this);
@@ -132,20 +134,52 @@ class Asset extends Component {
     if(+e.target.value.split(',')[2]){
         this.setState({visible: true})
     }
-    this.setState({preAsset: e.target.value, tmpAsset: e.target.value})
+    this.setState({preAsset: e.target.value})
+
+      if(e.target.value.split(',')[1]==='NOTEBOOK' || e.target.value.split(',')[1]==='UIONMAC'){
+        this.setState({hostAsset: ''})
+      }
+  }
+
+  handleSelect2(e) {
+    if(+e.target.value.split(',')[2]){
+        this.setState({visible: true})
+    }
+
+    this.setState({hostAsset: e.target.value})
   }
 
   handleSubmit(e) {
-    this.props.changeAsset(
-      {
-        preAsset: [
-          {
-            "categoryId":this.state.preAsset.split(',')[0],
-            "deviceType": this.state.preAsset.split(',')[1]
-          }
-        ]
+
+      console.log(this.state.preAsset,this.state.hostAsset)
+      if(this.state.hostAsset){
+          this.props.changeAsset(
+            {
+              preAsset: [
+                {
+                  "categoryId":this.state.preAsset.split(',')[0],
+                  "deviceType": this.state.preAsset.split(',')[1]
+                },
+                  {
+                      "categoryId":this.state.hostAsset.split(',')[0],
+                      "deviceType": this.state.hostAsset.split(',')[1]
+                  }
+              ]
+            }
+          );
+      }else{
+          this.props.changeAsset(
+            {
+              preAsset: [
+                {
+                  "categoryId":this.state.preAsset.split(',')[0],
+                  "deviceType": this.state.preAsset.split(',')[1]
+                }
+              ]
+            }
+          );
       }
-    );
+
     this.props.updateOver({over: [this.props.over[0], 1]})
   }
 
@@ -207,9 +241,49 @@ class Asset extends Component {
             </div>
           } key="MONITOR">
             <div className="find">
-              {this.assetList(asset,'dftHt')}
-              {this.assetList(asset,'dftMn')}
+                {this.assetList(asset,'dftMn')}
+              {/*{this.assetList(asset,'dftHt')}*/}
 
+                {
+                    asset ?
+                        <RadioGroup  value={this.state.hostAsset} size="large"
+                                     onChange={this.handleSelect2} >
+                            <List
+                                grid={{column: 3}}
+                                dataSource={asset['dftHt']}
+                                renderItem={(item, i) => (
+                                    <List.Item>
+                                        <Card style={((this.state.hostAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
+                                            <div className="asset-top">
+                                                <img src={item.assetPicture} alt="" className="asset-image"/>
+                                                {
+
+                                                    i===0?<img src={rec} alt="" className="asset-rec"/>:null
+
+                                                }
+                                                {
+                                                    (item.assetKeepStock>item.assetStock)?<img src={bu} alt="" className="asset-bu"/>:null
+
+                                                }
+                                            </div>
+                                            <div className="asset-title">{item.categoryName}</div>
+                                            <ul className="detail">
+                                                <li>cpu：{item.brand}</li>
+                                                <li>cpu：{item.cpu}</li>
+                                                <li>内存：{item.memory}</li>
+                                                <li>硬盘：{item.disk}</li>
+                                                <li>显卡：{item.card}</li>
+                                                <li>系统：{item.os}</li>
+                                                <li>分辨率：{item.resolution}</li>
+                                                <li>接口：{item.adapter}</li>
+                                                <li>尺寸：{item.size}</li>
+                                            </ul>
+                                            <RadioButton className={(item.assetKeepStock > item.assetStock)?'1':'2'} value={[item.categoryId,item.deviceType,+(item.assetKeepStock > item.assetStock)].toString()}>选择</RadioButton>
+                                        </Card>
+                                    </List.Item>
+                                )}
+                            /> </RadioGroup> : null
+                }
             </div>
           </TabPane>
           <TabPane tab={
@@ -223,7 +297,9 @@ class Asset extends Component {
               <div className="name">一体机</div>
             </div>
           } key="UIONMAC">
+              <div className="find">
             {this.assetList(asset,'dftUn')}
+              </div>
           </TabPane>
         </Tabs>
         <div className="buttonclub">
