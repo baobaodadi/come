@@ -41,7 +41,7 @@ const RadioButton = Radio.Button;
 const defaultState = {
   goods: [],
   preAsset: '',
-  visible: 1,
+  visible: 0,
   tmpAsset: '',
   select: 'NOTEBOOK'
 };
@@ -76,7 +76,6 @@ class Asset extends Component {
     }
 
   handleTab(value) {
-    console.log(value);
     this.setState({
       select: value
     });
@@ -87,7 +86,7 @@ class Asset extends Component {
       <div className="assetlist">
       {
         asset ?
-          <RadioGroup defaultValue={asset[type][0].categoryId} value={this.state.preAsset} size="large"
+          <RadioGroup  value={this.state.preAsset} size="large"
                       onChange={this.handleSelect} >
             <List
               grid={{column: 3}}
@@ -97,7 +96,6 @@ class Asset extends Component {
                   <Card style={((this.state.preAsset.toString()).indexOf(item.categoryId.toString())!==-1)?{ width:'273px',boxShadow: '0px 3px 4px #e5e5e5'}:{ width:'273px'}}>
                     <div className="asset-top">
                       <img src={item.assetPicture} alt="" className="asset-image"/>
-                      {console.log(item.categoryId)}
                       {
 
                         i===0?<img src={rec} alt="" className="asset-rec"/>:null
@@ -120,7 +118,7 @@ class Asset extends Component {
                       <li>接口：{item.adapter}</li>
                       <li>尺寸：{item.size}</li>
                     </ul>
-                    <RadioButton disable={(item.assetKeepStock > item.assetStock)} value={`${item.categoryId},${item.deviceType}`}>选择</RadioButton>
+                    <RadioButton className={(item.assetKeepStock > item.assetStock)?'1':'2'} value={[item.categoryId,item.deviceType,+(item.assetKeepStock > item.assetStock)].toString()}>选择</RadioButton>
                   </Card>
                 </List.Item>
               )}
@@ -131,7 +129,9 @@ class Asset extends Component {
   }
 
   handleSelect(e) {
-    console.log(e.target.value);
+    if(+e.target.value.split(',')[2]){
+        this.setState({visible: true})
+    }
     this.setState({preAsset: e.target.value, tmpAsset: e.target.value})
   }
 
