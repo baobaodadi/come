@@ -7,7 +7,8 @@ import {Link, withRouter} from "react-router-dom";
 import * as actionTypes from "../../../config/actionTypes";
 import {connect} from "react-redux";
 import './index.less';
-import wei from '../../../images/2wei.png'
+import wei from '../../../images/wei.png'
+import bu from '../../../images/bu.png';
 import {
   Table,
   Input,
@@ -87,7 +88,7 @@ class Prev extends Component {
               <div className="bigtitle">办公资产选择</div>
               <div className="prev">
                 <span className='title'>预选资产</span>
-                <span className='bu'>补货中</span>
+                <img src={bu} className='bu' />
                 <span className='level'>笔记本电脑</span>
                 <span className='sword'>></span>
                 <span className='level'>DELL</span>
