@@ -24,7 +24,7 @@ import {
   TreeSelect
 } from 'antd';
 import 'moment/locale/zh-cn'
-import logo from '../../../images/logo.png';
+import alert from '../../../images/alert.png';
 import note from '../../../images/note.png';
 import notes from '../../../images/notes.png';
 import ones from '../../../images/ones.png';
@@ -41,6 +41,7 @@ const RadioButton = Radio.Button;
 const defaultState = {
   goods: [],
   preAsset: '',
+  visible: 1,
   tmpAsset: '',
   select: 'NOTEBOOK'
 };
@@ -53,6 +54,8 @@ class Asset extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTab = this.handleTab.bind(this);
+    this.handleOk = this.handleOk.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
     this.assetList = this.assetList.bind(this);
 
   }
@@ -63,6 +66,14 @@ class Asset extends Component {
         asset: nextProps.asset
       });
   }
+
+    handleOk () {
+        this.setState({ visible: false });
+    }
+
+    handleCancel () {
+        this.setState({ visible: false });
+    }
 
   handleTab(value) {
     console.log(value);
@@ -93,21 +104,21 @@ class Asset extends Component {
 
                       }
                       {
-                        (item.assetKeepStock>item.assetStock)?<img src={bu} alt="" className="asset-rec"/>:null
+                        (item.assetKeepStock>item.assetStock)?<img src={bu} alt="" className="asset-bu"/>:null
 
                       }
                     </div>
                     <div className="asset-title">{item.categoryName}</div>
                     <ul className="detail">
-                      <li>cpu:{item.brand}</li>
-                      <li>cpu:{item.cpu}</li>
-                      <li>内存:{item.memory}</li>
-                      <li>硬盘:{item.disk}</li>
-                      <li>显卡:{item.card}</li>
-                      <li>系统:{item.os}</li>
-                      <li>分辨率:{item.resolution}</li>
-                      <li>接口:{item.adapter}</li>
-                      <li>尺寸:{item.size}</li>
+                      <li>cpu：{item.brand}</li>
+                      <li>cpu：{item.cpu}</li>
+                      <li>内存：{item.memory}</li>
+                      <li>硬盘：{item.disk}</li>
+                      <li>显卡：{item.card}</li>
+                      <li>系统：{item.os}</li>
+                      <li>分辨率：{item.resolution}</li>
+                      <li>接口：{item.adapter}</li>
+                      <li>尺寸：{item.size}</li>
                     </ul>
                     <RadioButton disable={(item.assetKeepStock > item.assetStock)} value={`${item.categoryId},${item.deviceType}`}>选择</RadioButton>
                   </Card>
@@ -149,6 +160,25 @@ class Asset extends Component {
     return (
 
       <div className="asset">
+          <Modal
+              visible={this.state.visible}
+              title="Title"
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              footer={[
+                  <div  className='tong' onClick={this.handleCancel}>同意等待，暂时使用临时机</div>,
+                  <div  className='qi' onClick={this.handleOk}>放弃公司配置自行携带电脑</div>,
+              ]}
+          >
+              <div className="modal-inner">
+               <img src={alert} alt="" className='modal-alert'/>
+                <div className="modal-word">
+                    <p>补货需要一定周期，</p>
+                    <p>是否继续选择补货资产为标配办公资产！</p>
+                </div>
+              </div>
+
+          </Modal>
         <Tabs defaultActiveKey="NOTEBOOK" onChange={this.handleTab}>
           <TabPane tab={
             <div>

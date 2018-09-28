@@ -1,5 +1,70 @@
 :global {
 
+  .ant-modal-body {
+    width: 356px;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 36px;
+  }
+
+  .modal-inner{
+    .modal-alert{
+      display:inline-block;
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      margin-top: -20px;
+    }
+    .modal-word{
+      display:inline-block;
+      p{
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #3F3F3F;
+        line-height: 20px;
+        margin: 0;
+      }
+    }
+  }
+
+  .ant-modal-content{
+    width: 500px;
+    height: 196px;
+  }
+  .ant-modal-title{
+    visibility: hidden;
+  }
+
+  .ant-modal-header,.ant-modal-footer {
+    border: none;
+  }
+
+  .ant-modal-footer {
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .tong,.qi{
+    width: 198px;
+    line-height: 30px;
+    display: inline-block;
+    border: 1px solid #DBDEE2;
+    border-radius: 2px;
+    color: #606060;
+    font-family: STHeitiSC-Light;
+    font-size: 14px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .tong{
+    margin-right: 12px;
+    background: #0074E9;
+    border-radius: 2px;
+    color: #ffffff;
+  }
+
   .ant-tabs-nav .ant-tabs-tab:hover {
     color: #3F3F3F !important;
   }
@@ -57,6 +122,8 @@
 
   .asset {
     width: 954px;
+
+
 
     .ant-radio-group-large .ant-radio-button-wrapper {
       height: 36px;
@@ -116,6 +183,13 @@
             position: absolute;
             top:0;
             left: 21px;
+            width: 42px;
+            //height: 42px;
+          }
+          .asset-bu{
+            position: absolute;
+            top:0;
+            right: 21px;
             width: 42px;
             //height: 42px;
           }
