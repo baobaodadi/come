@@ -89,12 +89,15 @@ class Prev extends Component {
               <div className="prev">
                 <span className='title'>预选资产</span>
                 <img src={bu} className='bu' />
+
                 {
+
                   asset&&asset.preAsset.map((item,i)=>{
+                    console.log(item)
                     return (<span key={i}>
-                    <span className='level'> {item.split(',')[0]}</span>
+                    <span className='level'> {item.deviceType}</span>
                     <span className='sword'>></span>
-                    <span className='level'> {item.split(',')[1]}  </span>
+                    <span className='level'> {item.categoryName}  </span>
                     </span>)
                   })
                 }
@@ -104,9 +107,9 @@ class Prev extends Component {
                 {
                   asset&&asset.tmpAsset.map((item,i)=>{
                   return (<span key={i}>
-                    <span className='level'> {item.split(',')[0]}</span>
+                       <span className='level'> {item.deviceType}</span>
                     <span className='sword'>></span>
-                    <span className='level'> {item.split(',')[1]}  </span>
+                    <span className='level'> {item.categoryName}  </span>
                     </span>)
                   })
                 }
@@ -115,7 +118,7 @@ class Prev extends Component {
                 <span className='title'>默认耗材</span>
                 {
                   asset&&asset.dftCmls.map((item,i)=>{
-                    return <span key={i} className='level'>{item}  </span>
+                    return <span key={i} className='level'>{item.categoryName}  </span>
                   })
                 }
               </div>

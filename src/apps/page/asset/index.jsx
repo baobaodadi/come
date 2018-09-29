@@ -172,12 +172,12 @@ class Asset extends Component {
             {
               preAsset: [
                 {
-                  "categoryId":this.state.preAsset.split(',')[0],
-                  "deviceType": this.state.preAsset.split(',')[1]
+                  "categoryId":this.state.preAsset.split(',')[2],
+                  "deviceType": this.state.preAsset.split(',')[0]
                 },
                   {
-                      "categoryId":this.state.hostAsset.split(',')[0],
-                      "deviceType": this.state.hostAsset.split(',')[1]
+                      "categoryId":this.state.hostAsset.split(',')[2],
+                      "deviceType": this.state.hostAsset.split(',')[0]
                   }
               ]
             }
@@ -187,8 +187,8 @@ class Asset extends Component {
             {
               preAsset: [
                 {
-                  "categoryId":this.state.preAsset.split(',')[0],
-                  "deviceType": this.state.preAsset.split(',')[1]
+                  "categoryId":this.state.preAsset.split(',')[2],
+                  "deviceType": this.state.preAsset.split(',')[0]
                 }
               ]
             }
