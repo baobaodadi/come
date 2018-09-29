@@ -33,6 +33,7 @@ import pcs from '../../../images/pcs.png';
 import pc from '../../../images/pc.png';
 import rec from '../../../images/rec.png';
 import bu from '../../../images/bu.png';
+import tong from '../../../images/tong.png';
 
 const TabPane = Tabs.TabPane;
 const RadioGroup = Radio.Group;
@@ -213,6 +214,10 @@ class Asset extends Component {
               </div>
 
           </Modal>
+          <div className="toptitle">
+              <img className="tongt" src={tong} alt=""/>
+              <span className="name">邮箱为日常工作必须工具，务必记清设定的密码信息！</span>
+          </div>
         <Tabs defaultActiveKey="NOTEBOOK" onChange={this.handleTab}>
           <TabPane tab={
             <div>

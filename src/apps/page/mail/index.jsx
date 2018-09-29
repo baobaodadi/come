@@ -11,6 +11,7 @@ import mailimg from '../../../images/mail.png';
 import passwordimg from '../../../images/password.png';
 import confirmimg from '../../../images/confirm.png';
 import errorimg from '../../../images/error.png';
+import tong from '../../../images/tong.png';
 import {
   Input,
   Button,
@@ -156,6 +157,10 @@ class Mail extends Component {
     return (
 
       <div className="mail">
+          <div className="toptitle">
+              <img className="tongt" src={tong} alt=""/>
+              <span className="name">邮箱为日常工作必须工具，务必记清设定的密码信息！</span>
+          </div>
         <div className="find">
           <Form onSubmit={this.handleSubmit}>
             <div className="mailinfo">
