@@ -45,7 +45,8 @@ const defaultState = {
   hostAsset: '',
   visible: 0,
   tmpAsset: '',
-  select: 'NOTEBOOK'
+  tmpAsset2: '',
+  select: 'NOTEBOOK',
 };
 
 class Asset extends Component {
@@ -71,10 +72,18 @@ class Asset extends Component {
   }
 
     handleOk () {
+      if(this.state.tempAsset){
+        this.setState({preAsset: this.state.tempAsset})
+      }
+
+      if(this.state.tempAsset2){
+        this.setState({hostAsset: this.state.tempAsset2})
+
+      }
         this.setState({ visible: false });
     }
 
-    handleCancel () {
+  handleCancel () {
         this.setState({ visible: false });
     }
 
@@ -121,7 +130,7 @@ class Asset extends Component {
                       <li>接口：{item.adapter}</li>
                       <li>尺寸：{item.size}</li>
                     </ul>
-                    <RadioButton className={(item.assetKeepStock > item.assetStock)?'1':'2'} value={[item.categoryId,item.deviceType,+(item.assetKeepStock > item.assetStock)].toString()}>选择</RadioButton>
+                    <RadioButton className={(item.assetKeepStock > item.assetStock)?'wrapper1':'wrapper2'} value={[item.categoryId,item.deviceType,+(item.assetKeepStock > item.assetStock)].toString()}>选择</RadioButton>
                   </Card>
                 </List.Item>
               )}
@@ -134,8 +143,11 @@ class Asset extends Component {
   handleSelect(e) {
     if(+e.target.value.split(',')[2]){
         this.setState({visible: true})
+      this.setState({tempAsset:  e.target.value})
+    }else{
+      this.setState({preAsset: e.target.value})
     }
-    this.setState({preAsset: e.target.value})
+
 
       if(e.target.value.split(',')[1]==='NOTEBOOK' || e.target.value.split(',')[1]==='UIONMAC'){
         this.setState({hostAsset: ''})
@@ -145,9 +157,11 @@ class Asset extends Component {
   handleSelect2(e) {
     if(+e.target.value.split(',')[2]){
         this.setState({visible: true})
+        this.setState({tempAsset2:  e.target.value})
+    }else{
+      this.setState({hostAsset: e.target.value})
     }
 
-    this.setState({hostAsset: e.target.value})
   }
 
   handleSubmit(e) {
@@ -201,8 +215,8 @@ class Asset extends Component {
               onOk={this.handleOk}
               onCancel={this.handleCancel}
               footer={[
-                  <div  className='tong' onClick={this.handleCancel}>同意等待，暂时使用临时机</div>,
-                  <div  className='qi' onClick={this.handleOk}>放弃公司配置自行携带电脑</div>,
+                  <div  className='tong' onClick={this.handleOk}>同意等待，暂时使用临时机</div>,
+                  <div  className='qi' onClick={this.handleCancel}>放弃公司配置自行携带电脑</div>,
               ]}
           >
               <div className="modal-inner">
@@ -283,7 +297,7 @@ class Asset extends Component {
                                                 <li>接口：{item.adapter}</li>
                                                 <li>尺寸：{item.size}</li>
                                             </ul>
-                                            <RadioButton className={(item.assetKeepStock > item.assetStock)?'1':'2'} value={[item.categoryId,item.deviceType,+(item.assetKeepStock > item.assetStock)].toString()}>选择</RadioButton>
+                                            <RadioButton className={(item.assetKeepStock > item.assetStock)?'wrapper1':'wrapper2'} value={[item.categoryId,item.deviceType,+(item.assetKeepStock > item.assetStock)].toString()}>选择</RadioButton>
                                         </Card>
                                     </List.Item>
                                 )}
